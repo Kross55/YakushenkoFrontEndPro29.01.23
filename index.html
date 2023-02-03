@@ -5,12 +5,173 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
     <script>
+        console.log('[HEAD] script 1')
+    </script>
+    <script src="index.js"></script>
+</head>
+<body>  
+    <script>
+        console.log('[Body] script 1')
+    </script>
+    <script src="index.js"></script>
+    <script>
+        // H/W #1
+        /*
         let name = prompt('What is your name?', '');
 
-        alert(`Hello, ${name}! How are you?`); 
+        alert(`Hello, ${name}! How are you?`);
+        */ 
+    </script>
+    <script>
+        // H/W #3
+        /*
+        let str1 = 'hellow';
+        let str2 = 'hey';
+        let str3 = 'yo';
+
+        console.log( str1.concat(str2).concat(str3) ) 
+
+        let num = 12345;
+
+        console.log( String(num).split('').join(' ') )
+        */
+
+        // H/W #4
+        /*
+        let num1 = +prompt('Введіть перше число', '');
+        let num2 = +prompt('Введіть друге число', '');
+
+        alert( num1 + num2 )
+        alert( num1 * num2 )
+        alert( num1 - num2 )
+        alert( num1 / num2 )
+        alert( num1 % num2 )
+        */
+
+        // H/W #5
+        /*
+        let action = prompt('Що ви хочете зробити (add, sub, mult, div)?', '')
+        let num1 = +prompt('Введіть перше число', '');
+        let num2 = +prompt('Введіть друге число', '');
+
+        switch(action) {
+            case 'add':
+                alert( `${num1} + ${num2} = ${num1 + num2}` );
+                break;
+            case 'sub':
+                alert( `${num1} - ${num2} = ${num1 - num2}` );
+                break;
+            case 'mult':
+                alert( `${num1} * ${num2} = ${num1 * num2}` );
+                break;
+            case 'div':
+                alert( `${num1} / ${num2} = ${num1 / num2}` );
+                break; 
+            default: 
+                alert( 'Ви зробили помилку!' );
+                break; 
+        }
+        */
+
+        // H/W #6
+        /*
+        let currentTime = prompt('Котра година?', '12:30')
+        let totalSec = ( +currentTime.slice(0, 2) * 3600 ) + ( +currentTime.slice(-2) * 60 )
+        alert(totalSec)
+        */
+
+        // H/W #7
+        /*
+        let num1 = +prompt('Введіть перше число', '');
+        let num2 = +prompt('Введіть друге число', '');
+        let num3 = +prompt('Введіть третє число', '');
+
+        let roundNum = ( num1 + num2 + num3) / 3;
+
+        alert(roundNum);
+        */
+
+        // H/W #8
+        /*
+        let userYearOfBirth   = prompt('Вкажіть ваш рік народження', '');
+        let userCity          = prompt('Вкажіть ваше місто', '');
+        let userSportActivity = prompt('Вкажіть спорт яким ви займаєтесь', '')
+
+        console.log(userYearOfBirth)
+        let age ;
+        switch(userYearOfBirth) {
+            case '': 
+                age = 'Шкода, що Ви не захотіли ввести свій рік народження';
+                break;
+            case userYearOfBirth:
+                age = 2023 - +userYearOfBirth;
+                break;
+        }
+
+        let cityPhrase;
+        switch(userCity) {
+            case '': 
+                cityPhrase = 'Шкода, що Ви не захотіли ввести своє місто';
+                break;
+            case 'Київ':
+                cityPhrase = 'Ти живеш у столиці України';
+                break;
+            case 'Вашингтон':
+                cityPhrase = 'Ти живеш у столиці США';
+                break;
+            case 'Лондон':
+                cityPhrase = 'Ти живеш у столиці Англії';
+                break;
+            default: 
+                cityPhrase = `Ти живеш у місті ${userCity}`;
+                break; 
+        }
+
+        let sportPhrase;
+        switch(userSportActivity) {
+            case '': 
+                sportPhrase = 'Шкода, що Ви не захотіли ввести свій вид спорту';
+                break;
+            case 'Теніс':
+                sportPhrase = 'Круто! Хочеш стати Новаком Джоковичем?';
+                break;
+            case 'Біатлон':
+                sportPhrase = 'Круто! Хочеш стати Мартеном Фуркадом?';
+                break;
+            case 'Плавання':
+                sportPhrase = 'Круто! Хочеш стати Майклом Фелпсом?';
+                break;
+            default: 
+                sportPhrase = `${userSportActivity} твій вид спорту`;
+                break; 
+        }
+
+        alert(`${age}\n${cityPhrase}\n${sportPhrase}`)
+        */
+
+        // H/W #9
+        /*
+        let numOrStr = prompt('input number or string', '');
+        console.log(numOrStr);
+        console.log(numOrStr.trim());
+        console.log(isNaN( +numOrStr ));
+
+        switch(numOrStr) {
+            case null:
+                console.log('Empty String'); 
+                break;
+            case numOrStr.trim() === '':
+                console.log('Empty String'); 
+                break;
+            case isNaN( +numOrStr ):
+                console.log(' number is Ba_NaN')
+                break;
+            default:
+                console.log('OK!')
+                break;
+        } 
+        */     
     </script>
 </body>
 </html>
