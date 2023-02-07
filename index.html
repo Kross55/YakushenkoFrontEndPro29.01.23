@@ -10,10 +10,8 @@
     </script>
     <script src="index.js"></script>
 </head>
-<body>  
-    <script>
-        console.log('[Body] script 1')
-    </script>
+<body> 
+    
     <script src="index.js"></script>
 
     <script>
@@ -27,31 +25,172 @@
         
 
         // H/W #9
-        /**/ 
+        /* 
         let numOrStr = prompt('input number or string');
-        console.log(numOrStr);
-        console.log(isNaN( +numOrStr ));
 
-        switch(numOrStr) {
-            case null:
+        switch(true) {
+            case numOrStr === null:
                 console.log('ви скасували'); 
                 break;
-            case '':
+            case numOrStr.trim() === '':
                 console.log('Empty String');  
                 break;
-            case numOrStr:
-                if(numOrStr.trim() === '') 
-                console.log('Empty String');
-                break;
-            case 'NaN':
+            case isNaN( +numOrStr ):
                 console.log(' number is Ba_NaN');
                 break;
             default:
                 console.log('OK!')
                 break;
         } 
+        */
 
-            
+        // H/W #10
+        /* 
+        //10.1
+        const arr = [];
+
+        for (let i = 10; i < 21; i++) {
+            arr.push(i)
+        }
+
+        let div = document.createElement('div');
+        div.className = 'digitsRow';
+        div.innerHTML = `${String(arr)}`;
+
+        document.body.append(div);
+
+        //10.2
+        const arr2 = [];
+
+        for (let i = 10; i < 21; i++) {
+            let iPowTwo = i ** 2;
+            arr2.push(iPowTwo);
+        }
+ 
+        let div2 = document.createElement('div');
+        div2.className = 'digitsPowTwoRow';
+        div2.innerHTML = `${String(arr2)}`;
+
+        document.body.append(div2);
+        
+        //10.3
+        const arr3 = [];
+
+        for (let i = 1; i < 11; i++) {
+            let iMulSeven = i * 7;
+            arr3.push(`${i} * 7 = ${iMulSeven}`);
+        }
+ 
+        let div3 = document.createElement('div');
+        div3.className = 'digitsPowTwoRow';
+        div3.innerHTML = `${String(arr3)}`;
+
+        document.body.append(div3);
+
+        //10.4
+        let sum = 0;
+
+        for (let i = 0; i < 16; i++) {
+            sum += i
+        }
+
+        alert(sum);
+
+        //10.5
+        let mul = 1;
+
+        for (let i = 15; i < 36; i++) {
+            mul *= i
+        }
+
+        alert(mul);
+
+        //10.6
+        let sum2 = 0;
+
+        for (let i = 0; i < 501; i++) {
+            sum2 += i;
+        }
+
+        alert(sum2/500);
+        
+        //10.7
+        let sum3 = 0;
+
+        for (let i = 30; i < 81; i++) {
+            if (i % 2 === 1) continue;
+            sum3 += i;
+        }
+
+        alert(sum3);
+        
+        //10.8
+        const arr4 = [];
+
+        for (let i = 100; i < 200; i++) {
+            if (i % 3 > 0) continue;
+            arr4.push(i)
+        }
+
+        let div4 = document.createElement('div');
+        div4.className = 'digitsDivededThreeRow';
+        div4.innerHTML = `${String(arr4)}`;
+
+        document.body.append(div4);
+        */
+        
+        //10.9 & 10.10 & 10.11
+        /*
+        function numDividers(num) {
+            let arr = []
+
+            for (let i = 0; i <= num; i++) {
+                if(num % i != 0) continue;
+                arr.push(i)
+            }
+
+            return arr
+        }
+
+        let numDividersRow = String(numDividers(236));
+
+        let filteredArr = (numDividers(236).filter( item => item % 2 === 0 ))
+
+        let lengthFilteredArr = filteredArr.length
+
+        let sumFilteredArr = filteredArr.reduce( (sum, current) => sum + current, 0 )
+
+        let div5 = document.createElement('div');
+        div5.className = 'numDividersRow';
+        div5.innerHTML = `${numDividersRow} <br> ${lengthFilteredArr} <br> ${sumFilteredArr}`;
+
+        document.body.append(div5);
+        */
+
+        //10.12
+        function mul(num) {
+            const arrForNum = [];
+
+            for (let i = 1; i < 11; i++) {
+                let iMulSeven = i * num;
+                arrForNum.push(`${i} * ${num} = ${iMulSeven}`);
+            }
+            return arrForNum;
+        }
+
+        console.log(mul(10));
+
+        let finalArr = [];
+
+        for (let i = 1; i < 11; i++) {
+            finalArr.push( mul(i) )
+        }
+ 
+        let div6 = document.createElement('div');
+        div6.className = 'finalArr';
+        div6.innerHTML = `${String(finalArr)}`;
+
+        document.body.append(div6);
     </script>
 </body>
 </html>
