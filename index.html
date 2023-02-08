@@ -168,17 +168,16 @@
         */
 
         //10.12
+        /*
         function mul(num) {
             const arrForNum = [];
 
             for (let i = 1; i < 11; i++) {
                 let iMulSeven = i * num;
-                arrForNum.push(`${i} * ${num} = ${iMulSeven}`);
+                arrForNum.push(`${num} * ${i} = ${iMulSeven}`);
             }
             return arrForNum;
         }
-
-        console.log(mul(10));
 
         let finalArr = [];
 
@@ -191,6 +190,102 @@
         div6.innerHTML = `${String(finalArr)}`;
 
         document.body.append(div6);
+        */
+
+        //  11
+        //11.1
+        /*
+        let arrHalfOfOne = [];
+
+        for (let i = 200; i < 301; i++) {
+            if(i % 5 != 0) continue;
+            arrHalfOfOne.push(i / 10);
+        }
+
+        let htmlString = arrHalfOfOne.join(' ');
+ 
+        let div7 = document.createElement('div');
+        div7.className = 'strinHalfOfOne';
+        div7.innerHTML = htmlString;
+
+        document.body.append(div7);
+        */
+
+        //11.2
+        /*
+        let arrDollarExchenge = [];
+
+        for (let i = 10; i <= 100; i++) {
+            if(i % 10 != 0) continue;
+            arrDollarExchenge.push(i * 27); //хороший у вас курс доллара, віеще продаёте?
+        }
+
+        let htmlString = arrDollarExchenge.join(' ');
+ 
+        let div8 = document.createElement('div');
+        div8.className = 'arrDollarExchenge';
+        div8.innerHTML = htmlString;
+
+        document.body.append(div8);
+        */
+
+        //11.3
+        /*
+        function maxNum(num) {
+            let arrPowTwo = [];
+
+            for(let i = 1; i <= 100; i++) {
+                arrPowTwo.push(i ** 2)
+            }
+
+            return arrPowTwo.filter( item => item <= num )
+        }
+
+        let div9 = document.createElement('div');
+        div9.className = 'arrPowTwo';
+        div9.innerHTML = maxNum(577);
+
+        document.body.append(div9);
+        */
+
+        //11.4
+        /*
+        function simpleNum(num) {
+            let arrDividers = [];
+
+            for(let i = 1; i < num; i++) {
+                if(num % i != 0) continue;
+                arrDividers.push(i)
+            }
+            console.log(arrDividers)
+            if(arrDividers.length === 1) return 'Це просте число!';
+
+            return 'Це число не є простим'
+        }
+
+        alert(simpleNum(3));
+        */
+
+        //11.5
+        /**/
+        
+        function numCheckPowThree(num) {
+            let powThreeArr = [];
+            let powThree = 1;
+
+            while(powThree <= num) {
+                powThreeArr.push(powThree *= 3)
+            }
+            
+            if(powThreeArr.find(item => item === num)) return 'Це число можна отримати шляхом зведення числа 3 у деякий ступінь!';
+
+            return 'Це число НЕ МОЖНА отримати шляхом зведення числа 3 у деякий ступінь!';
+        }
+
+        alert(numCheckPowThree(242));
+
+        
+
     </script>
 </body>
 </html>
