@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+        //1
+        let arr = [16, -37, 54, -4, 72, -56, 47, 4, -16, 25, -37, 46, 4, -51, 27, -63, 4, -54, 76, -4, 12, -35, 4, 47];
+
+        let positiveArr = arr.filter( item => item > 0 );
+
+        let totalSumOfPositiveNum = positiveArr.reduce( (sum, current) => sum + current, 0);
+        let numberOfPositiveNum = positiveArr.length;
+
+        //2
+        let minNum = Math.min(...arr);
+        let indexOfMinNum = arr.findIndex( item => item === minNum);
+
+        //3
+        let maxNum = Math.max(...arr);
+        let indexOfMaxNum = arr.findIndex( item => item === maxNum);
+
+        //4
+        let negativeArr = arr.filter( item => item < 0 );
+
+        let numberOfNegativeNum = negativeArr.length;
+
+        //5
+        let countOddPositiveNum = positiveArr.filter( item => item % 2 === 1 ).length;
+
+        //6
+        let countEvenPositiveNum = positiveArr.filter( item => item % 2 === 0 ).length;
+
+        //7
+        let totalEvenPositiveNum = positiveArr.filter( item => item % 2 === 0 ).reduce( (sum, current) => sum + current, 0);
+
+        //8
+        let totalOddPositiveNum = positiveArr.filter( item => item % 2 === 1 ).reduce( (sum, current) => sum + current, 0);
+
+        //9
+        let mulPositiveNum = 1;
+        for(let num of positiveArr){
+            console.log(mulPositiveNum *= num);
+        }
+
+        //10
+        let sortedArr = arr.sort( (a, b) => b - a )
+        console.log(sortedArr)
+        
+        sortedArr.length = 1
+        console.log(sortedArr)
+
+    
+    </script>
+</body>
+</html>
