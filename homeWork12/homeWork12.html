@@ -10,14 +10,31 @@
 
     <script>
         
-        let customArr = [68, 15, 355, 82, 39, 5, 23];
-        alert(customArr);
+        let arrString = prompt('Введіть єлементи массиву через кому', '');
+        let arrLength = prompt('Введіть довжину массиву', '');
+
+        let customArr = arrString.split(',');
+        customArr.length = arrLength;
+
+        let div = document.createElement('div');
+        div.className = 'customArr';
+        div.innerHTML = String(customArr);
+
+        document.body.append(div);
 
         let sortedArr = customArr.sort( (a, b) => a - b);
-        alert(customArr);
+
+        let div1 = document.createElement('div');
+        div1.className = 'sortedArr';
+        div1.innerHTML = String(customArr);
+        document.body.append(div1);
 
         let changedArr = customArr.splice(2, 3);
-        alert(customArr);
+        
+        let div2 = document.createElement('div');
+        div2.className = 'changedArr';
+        div2.innerHTML = String(customArr);
+        document.body.append(div2);
 
     </script>
 </body>
