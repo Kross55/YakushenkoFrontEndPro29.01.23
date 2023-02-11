@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+
+        // 17.1
+        /*Дано масив з елементами різних типів. Створити функцію яка вираховує середнє \n арифметичне лише числових елементів даного масиву.*/
+        const arrMix = [781, 'abs', 33, true, '124a', 999, '538', NaN, false];
+
+        function averageNum(arr) {
+            const numArr = arr.filter( item => isFinite(item) );
+
+            const numArr2 = numArr.filter( item => item !== true && item !== false );
+            
+            return ( numArr2.reduce( (sum, current) => sum + +current, 0) / numArr2.length );
+        }
+
+        console.log(averageNum(arrMix));
+          
+    </script>
+</body>
+</html>
