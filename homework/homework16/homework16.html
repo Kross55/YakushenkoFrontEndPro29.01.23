@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+
+        // 16
+        //Реалізуйте функцію generateKey(length, characters), яка повертає рядок випадкових символів із набору characters довжиною length. span>
+
+        const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+        function generateKey(num, str) {
+
+            let keyStr = '';
+
+            for(let i = 0; i < num; i++) {
+                let randomSymbol = str[Math.round(Math.random() * 36)];
+                keyStr += randomSymbol
+            }
+
+            return keyStr;
+        }
+
+        const key = generateKey(5, characters);
+        
+        console.log(key)
+
+          
+    </script>
+</body>
+</html>
