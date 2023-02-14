@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+
+        // 20
+        
+        let ladder = {
+            step: 0,
+                up: function () {
+                alert( this.step++ );
+                return this;
+            },
+            down: function () {
+                alert( this.step-- );
+                return this;
+            },
+            showStep: function () { // показывает текущую ступеньку
+                alert( this.step );
+                return this;
+            }
+        };
+
+        /*
+        ladder.up();
+        ladder.up();
+        ladder.down();
+        ladder.showStep(); // 1
+        */
+
+        ladder.up().up().down().showStep(); // 1
+
+    </script>
+</body>
+</html>
