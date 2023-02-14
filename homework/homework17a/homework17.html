@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+
+        // 17.1
+        /*Дано масив з елементами різних типів. 
+        Створити функцію яка вираховує середнє \n 
+        арифметичне лише числових елементів даного масиву.*/
+        /*
+        const arrMix = [781, 'abs', 33, true, '124a', 999, '538', NaN, false];
+
+        function averageNum(arr) {
+            const numArr = arr.filter( item => isFinite(item) );
+
+            const numArr2 = numArr.filter( item => item !== true && item !== false );
+            
+            return ( numArr2.reduce( (sum, current) => sum + +current, 0) / numArr2.length );
+        }
+
+        console.log(averageNum(arrMix));
+        */
+
+        // 17.2
+        /*Написати функцію doMath(x, znak, y), яка отримує 3 аргументи: 
+        числа x і y, рядок znak. У змінній znak може бути: +, -, *, /, %, ^ (ступінь ).
+        Вивести результат математичної дії, вказаної в змінній znak.
+        Обидва числа і знак виходять від користувача.*/
+        /*
+        let x = +prompt('x?', '');
+        let znak = prompt('znak?', '');
+        let y = +prompt('y?', '');
+        
+        function doMath(num1, sign, num2) {
+            
+            switch(sign) {
+                case '+': 
+                    return num1 + num2;
+                    break;
+                case '-': 
+                    return num1 - num2;
+                    break;
+                case '*': 
+                    return num1 * num2;
+                    break;
+                case '/':
+                    return num1 / num2;
+                    break;
+                case '%': 
+                    return num1 % num2;
+                    break;
+                case '**': 
+                    return num1 ** num2;
+                    break;
+                default:
+                    return alert('You put wrong znak!')
+                    break;
+            }
+
+        }
+
+        alert(doMath(x, znak, y));
+        */
+
+        // 17.3
+        /*Написати функцію заповнення даними користувача двомірного масиву.
+         Довжину основного масиву і внутрішніх масивів задає користувач.
+         Значення всіх елементів всіх масивів задає користувач.*/ 
+        /*
+        let arrLength1 = +prompt('Main Array length?', '');
+        let arrLength2 = +prompt('Sub Array length?', '');
+ 
+        function arrFilling(num1, num2){
+            let arr = new Array(num1);  
+                      
+            for (let i = 0; i < num1; i++) {
+                arr[i] = new Array(num2);        
+            }
+
+            for (let i = 0; i < num1; i++) {
+                for (let j = 0; j < num2; j++) {
+                    arr[i][j] = prompt(`Fill in element ${j} in massive ${i}`, '')
+                }
+            }
+            return arr;
+        }   
+ 
+        console.log( arrFilling(arrLength1, arrLength2) ); 
+        */
+
+        // 17.4
+        /*творити функцію, яка прибирає з рядка всі символи, 
+        які ми передали другим аргументом. 
+        'func(" hello world", ['l', 'd'])' поверне нам "heo wor". 
+        Вихідний рядок та символи для видалення задає користувач.*/
+        /**/
+
+        let userStr = prompt('Wright a string', '');
+        let symbolsArr = [];
+        
+        let symbolsArrLength = +prompt('How many symbols do you want delete?', '');
+        for (let i = 0; i < symbolsArrLength; i++) {
+            symbolsArr[i] = prompt(`Put symbol ${i + 1}`, '');
+        }
+
+        console.log(userStr);
+        console.log(symbolsArr);
+
+
+        function delSymbFromStr(str, symb) {
+                let arrStr = str.split('')
+                let fiteredArr = arrStr.filter( item => !symb.includes(item))
+                return fiteredArr.join('')
+        }
+
+        console.log( delSymbFromStr(userStr, symbolsArr) );
+        
+       
+
+    </script>
+
+</body>
+</html>
