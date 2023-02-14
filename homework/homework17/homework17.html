@@ -101,6 +101,7 @@
         'func(" hello world", ['l', 'd'])' поверне нам "heo wor". 
         Вихідний рядок та символи для видалення задає користувач.*/
         /**/
+
         let userStr = prompt('Wright a string', '');
         let symbolsArr = [];
         
@@ -109,17 +110,19 @@
             symbolsArr[i] = prompt(`Put symbol ${i + 1}`, '');
         }
 
+        console.log(userStr);
+        console.log(symbolsArr);
+
+
         function delSymbFromStr(str, symb) {
-                return str.split('').filter( item => {
-                    for (let i = 0; i < symb.length; i++) {
-                        symb[i]
-                    }
-                    return item
-                })
+                let arrStr = str.split('')
+                let fiteredArr = arrStr.filter( item => !symb.includes(item))
+                return fiteredArr.join('')
         }
 
         console.log( delSymbFromStr(userStr, symbolsArr) );
-
+        
+       
 
     </script>
 
