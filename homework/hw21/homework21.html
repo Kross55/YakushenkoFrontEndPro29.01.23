@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+
+        // 21  
+        class Human {
+            humanName;
+            humanGender;
+            constructor(name, gender) {
+                this.humanName = name;
+                this.humanGender = gender;
+            }
+        }
+
+        let human1 = new Human('Alex', 'male');
+        let human2 = new Human('Ira', 'female');
+        let human3 = new Human('Boris', 'male');
+
+        class Flat {
+            residents = [];
+
+            addResident(human) {
+                this.residents.push(human);
+            }
+        }
+
+        let flat1 = new Flat;
+        flat1.addResident(human1);
+        flat1.addResident(human2);
+
+        let flat2 = new Flat;
+        flat2.addResident(human3)
+
+        let flat3 = new Flat;
+        let flat4 = new Flat;
+        let flat5 = new Flat;
+
+        class House {
+            flats = [];
+            totalFlats;
+            constructor(totalFlats){
+                this.totalFlats = totalFlats;
+            }
+            addFlat(flat) {
+                if(this.flats.length >= this.totalFlats) {
+                    console.log(`total flats cannot be more than 4`)
+                    return;
+                } 
+                    this.flats.push(flat) 
+            }
+            
+        }
+
+        let house1 = new House(4);
+        house1.addFlat(flat1);
+        house1.addFlat(flat2);
+        house1.addFlat(flat3);
+        house1.addFlat(flat4);
+        house1.addFlat(flat5);
+        house1.addFlat(flat5);
+
+        console.log(house1);
+        
+    </script>
+</body>
+</html>
