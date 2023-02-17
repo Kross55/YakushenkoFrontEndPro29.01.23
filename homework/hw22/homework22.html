@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+
+        // 22
+
+        /*
+        */
+        class Human {
+            humanName;
+            humanAge;
+            constructor(name, age) {
+                this.humanName = name;
+                this.humanAge = age;
+            }
+            greeting() {
+                console.log(`Hi, my name is ${this.humanName}. I am ${this.humanAge}`)
+            }
+        }
+
+        let human1 = new Human('John', 21)
+        let human2 = new Human('Bill', 17)
+        let human3 = new Human('Irma', 25)
+
+        class Car {
+            carBrand;
+            carModel;
+            carYear;
+            carNumber;
+            carOwner;
+            constructor(brand, model, year, number) {
+                this.carBrand = brand;
+                this.carModel = model;
+                this.carYear = year;
+                this.carNumber = number;               
+            }
+            owner(human) {
+                if(human.humanAge < 18) {
+                    console.log(`Owner must be at least 18 years old!`)
+                    return;
+                } 
+                    this.carOwner = human
+            }
+            info() {
+                console.log(`Brand: ${this.carBrand}, \nModel: ${this.carModel}, \nYear: ${this.carYear}, \nNumber: ${this.carNumber}`);
+                console.log(this.carOwner.greeting())
+            }
+        }
+
+        let car1 = new Car('Mazda', 'CX5', 2018, 'BH7557HB')
+        let car2 = new Car('Honda', 'CRV', 2015, 'BH1111HB')
+
+        car1.owner(human3);
+        car2.owner(human2);
+        car2.owner(human1);
+
+        console.log( car1.info() );
+        console.log( car2.info() );
+        
+
+    </script>
+</body>
+</html>
