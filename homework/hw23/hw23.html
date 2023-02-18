@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+
+        // 21  
+        
+        class Student {
+            studentName;
+            studentSurname;
+            studentYearOfBirth;
+            studentMarks = [];
+            presence = new Array(25);
+
+            constructor(name, surname, year) {
+                this.studentName = name;
+                this.studentSurname = surname;
+                this.studentYearOfBirth = year;
+            }
+
+            age() {
+                let date = new Date;
+                const currentYear = date.getFullYear()
+                console.log(`He/she is ${currentYear - this.studentYearOfBirth}`)
+            }
+
+            averageGrade() {
+                return  (this.studentMarks.reduce( (sum, current) => sum + current, 0)) / 
+                        this.studentMarks.length;
+            }
+
+            mark(mark) {
+                this.studentMarks.push(mark);
+                return this.studentMarks
+            }
+
+            present() {
+                let index = this.presence.findIndex( item => item === undefined );
+                if( index === -1 ) return;
+                this.presence[index] = true;
+                return this.presence;
+            }
+
+            absent() {
+                let index = this.presence.findIndex( item => item === undefined );
+                if( index === -1 ) return;
+                this.presence[index] = false;
+                return this.presence;
+            }
+
+            summary() {
+                let averageGrade = this.averageGrade();
+                let presentArr = this.presence.filter( item => item === true );
+                let averagePresence = presentArr.length / this.presence.length
+                
+                if (averageGrade > 90 && averagePresence > 0.9) {
+                    console.log('Молодець!')
+                } else if (averageGrade > 90 || averagePresence > 0.9) {
+                    console.log('Добре, але можна краще')
+                } else {
+                    console.log('Редиска!')
+                }
+            }
+        }
+
+        const student1 = new Student('Alla', 'Stoyan', 1986);
+        const student2 = new Student('Gena', 'Oganesyan', 1993);
+        const student3 = new Student('Olga', 'Koval', 1984);
+
+        student1.mark(92);
+        student1.mark(81);
+        student1.present();
+        student1.absent();
+        student1.absent();
+        student1.present();
+        console.log(student1);
+        student1.summary();
+
+        student2.mark(100);
+        for(let i = 0; i < 30; i++) {
+            student2.present()
+        };
+        console.log(student2);
+        student2.summary();
+
+        
+        for(let i = 0; i < 55; i++) {
+            student3.absent()
+        };
+        for(let i = 0; i < 10; i++) {
+            student3.mark(91);
+        };
+        console.log(student3);
+        student3.summary();
+        
+        
+        
+    </script>
+</body>
+</html>
