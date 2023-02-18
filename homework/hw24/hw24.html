@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+
+        // 24 
+
+        const SIZE_SMALL = 'small';
+        const SIZE_BIG = 'big';
+        const TOPPING_MAYO = 'mayo';
+        const TOPPING_SAUCE = 'sauce';
+        const STUFFING_CHEESE = 'cheese';
+        const STUFFING_SALAD = 'salad';  
+        const STUFFING_POTATO = 'potato';  
+
+        class Humburger {
+            totalPrice;
+            totalCalories;
+            size;
+            stuffing;
+            topping = new Array(2);
+
+            constructor(size, stuffing) {
+                this.size = size;
+                this.stuffing = stuffing;
+            }
+
+            addTopping(topping) {
+                let index = this.topping.findIndex( item => item === undefined );
+                let toppingAdded = this.topping.find( item => item === topping );
+                if( index === -1 || toppingAdded) return;
+                this.topping[index] = topping;
+                return this.topping;
+            }
+
+            calculatePrice() {
+                let size;
+
+                switch(this.size) {
+                    case 'small':
+                        size = 50;
+                        break;
+                    case 'big':
+                        size = 100;
+                        break;
+                    default:
+                        size = 0;
+                }
+                
+                let stuffing;
+
+                switch(this.stuffing) {
+                    case 'cheese':
+                        stuffing = 10;
+                        break;
+                    case 'salad':
+                        stuffing = 20;
+                        break;
+                    case 'potato': 
+                        stuffing = 15;
+                        break;
+                    default:
+                        stuffing = 0;
+                }
+
+                let topping = 0;
+
+                if( this.topping.find( item => item === 'mayo' ) ) topping += 20; 
+                if( this.topping.find( item => item === 'sauce' ) ) topping += 15; 
+
+                this.totalPrice = size + stuffing + topping
+                return console.log(`Price: ${this.totalPrice} тугриків`);
+            }
+
+            calculate() {
+                let size;
+
+                switch(this.size) {
+                    case 'small':
+                        size = 20;
+                        break;
+                    case 'big':
+                        size = 40;
+                        break;
+                    default:
+                        size = 0;
+                }
+                
+                let stuffing;
+
+                switch(this.stuffing) {
+                    case 'cheese':
+                        stuffing = 20;
+                        break;
+                    case 'salad':
+                        stuffing = 5;
+                        break;
+                    case 'potato': 
+                        stuffing = 10;
+                        break;
+                    default:
+                        stuffing = 0;
+                }
+
+                let topping = 0;
+
+                if( this.topping.find( item => item === 'mayo' ) ) topping += 5; 
+                if( this.topping.find( item => item === 'sauce' ) ) topping += 0; 
+
+                this.totalCalories = size + stuffing + topping
+                return console.log(`Calories: ${this.totalCalories} calories`);
+            }
+
+        }
+
+        let humburger1 = new Humburger(SIZE_SMALL, STUFFING_POTATO);
+        humburger1.addTopping(TOPPING_MAYO);
+
+        console.log(humburger1);
+        console.log(humburger1.calculatePrice());
+        console.log(humburger1.calculate());
+
+        humburger1.addTopping(TOPPING_SAUCE);
+        console.log(humburger1.calculatePrice());
+
+        let humburger2 = new Humburger(SIZE_BIG, STUFFING_SALAD)
+        humburger2.addTopping(TOPPING_SAUCE)
+        humburger2.addTopping(TOPPING_SAUCE)
+        console.log(humburger2);
+        console.log(humburger2.calculatePrice());
+        console.log(humburger2.calculate());
+        
+    </script>
+</body>
+</html>
