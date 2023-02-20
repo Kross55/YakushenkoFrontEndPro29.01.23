@@ -21,15 +21,25 @@
         sum(20) = 28
         */ 
         /**/ 
-        let total = 0;
         
-        function sum(num) {
-            return total += num
-        }
+        
+        function createSum() {
+            let total = 0;
 
-        console.log( sum(3) );
-        console.log( sum(5) );
-        console.log( sum(20) );
+            return function sum(x) {
+                return total += x;
+            }
+
+        };
+
+        const result = createSum();
+
+        
+        console.log( result(5) );
+        console.log( result(8) );
+        console.log( result(10) );
+        
+        
          
     </script>
 </body>
