@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+
+        // 25 
+
+        class SuperMath {
+            X;
+            Y;
+            znak;
+            check(obj) {
+                this.X = obj.X;
+                this.Y = obj.Y;
+                this.znak = obj.znak;
+
+                let answer = prompt(`Do you you want to use the znak ${this.znak}`, '');
+
+                switch(answer) {
+                    case 'yes': 
+                        this.result();
+                        break;
+                    case 'no': 
+                        this.input();
+                        this.result();
+                        break;
+                    default:
+                        alert('Answer yes or no')
+                        this.check(obj);
+                }
+
+            }
+
+            input() {
+                this.znak = prompt('Choose the znak: +, -, *, /, %', '')
+                return this.znak
+            }
+
+            result() {
+                let result;
+
+                switch(this.znak) {
+                    case '+': 
+                        result = this.X + this.Y;
+                        break;
+                    case '-': 
+                        result = this.X - this.Y;
+                        break;
+                    case '*': 
+                        result = this.X * this.Y;
+                        break;
+                    case '/': 
+                        result = this.X / this.Y;
+                        break;
+                    case '%': 
+                        result = this.X % this.Y;
+                        break;
+
+                }
+                console.log(result)
+            }
+        }
+
+        let obj1 = {X: 12, Y: 3, znak: '/'}
+
+        let p = new SuperMath;
+        p.check(obj1);
+        
+        console.log(p);
+        
+    </script>
+</body>
+</html>
