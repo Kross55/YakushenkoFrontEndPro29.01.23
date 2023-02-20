@@ -18,15 +18,15 @@
         const arrMix = [781, 'abs', 33, true, '124a', 999, '538', NaN, false];
 
         function averageNum(arr) {
-            const numArr = arr.filter( item => isFinite(item) );
-
-            const numArr2 = numArr.filter( item => item !== true && item !== false );
+            const numArr = arr.filter( item => typeof item === "number" && !isNaN(item) );
+            console.log(numArr)
             
-            return ( numArr2.reduce( (sum, current) => sum + +current, 0) / numArr2.length );
+            return ( numArr.reduce( (sum, current) => sum + +current, 0) / numArr.length );
         }
 
         console.log(averageNum(arrMix));
         */
+        
 
         // 17.2
         /*Написати функцію doMath(x, znak, y), яка отримує 3 аргументи: 
@@ -42,25 +42,25 @@
             
             switch(sign) {
                 case '+': 
-                    return num1 + num2;
+                    num1 + num2;
                     break;
                 case '-': 
-                    return num1 - num2;
+                    num1 - num2;
                     break;
                 case '*': 
-                    return num1 * num2;
+                    num1 * num2;
                     break;
                 case '/':
-                    return num1 / num2;
+                    num1 / num2;
                     break;
                 case '%': 
-                    return num1 % num2;
+                    num1 % num2;
                     break;
                 case '**': 
-                    return num1 ** num2;
+                    num1 ** num2;
                     break;
                 default:
-                    return alert('You put wrong znak!')
+                    alert('You put wrong znak!')
                     break;
             }
 
