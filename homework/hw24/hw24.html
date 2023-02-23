@@ -10,22 +10,21 @@
 
     <script>
 
-        // 24 
-
-        const SIZE_SMALL = 'small';
-        const SIZE_BIG = 'big';
-        const TOPPING_MAYO = 'mayo';
-        const TOPPING_SAUCE = 'sauce';
-        const STUFFING_CHEESE = 'cheese';
-        const STUFFING_SALAD = 'salad';  
-        const STUFFING_POTATO = 'potato';  
+        // 24  
 
         class Humburger {
             totalPrice;
             totalCalories;
+            static SIZE_SMALL = "small";
+            static SIZE_BIG = 'big';
+            static STUFFING_CHEESE = 'cheese';
+            static STUFFING_SALAD = 'salad';  
+            static STUFFING_POTATO = 'potato';
+            static TOPPING_MAYO = 'mayo';
+            static TOPPING_SAUCE = 'sauce';
             size;
             stuffing;
-            topping = new Array(2);
+            topping = [];
 
             constructor(size, stuffing) {
                 this.size = size;
@@ -33,10 +32,10 @@
             }
 
             addTopping(topping) {
-                let index = this.topping.findIndex( item => item === undefined );
+                //let index = this.topping.findIndex( item => item === undefined );
                 let toppingAdded = this.topping.find( item => item === topping );
-                if( index === -1 || toppingAdded) return;
-                this.topping[index] = topping;
+                if( topping.length > 2 && toppingAdded ) return;
+                this.topping.push(topping) ;
                 return this.topping;
             }
 
@@ -44,10 +43,10 @@
                 let size;
 
                 switch(this.size) {
-                    case 'small':
+                    case Humburger.SIZE_SMALL:
                         size = 50;
                         break;
-                    case 'big':
+                    case Humburger.SIZE_BIG:
                         size = 100;
                         break;
                     default:
@@ -57,13 +56,13 @@
                 let stuffing;
 
                 switch(this.stuffing) {
-                    case 'cheese':
+                    case Humburger.STUFFING_CHEESE:
                         stuffing = 10;
                         break;
-                    case 'salad':
+                    case Humburger.STUFFING_SALAD:
                         stuffing = 20;
                         break;
-                    case 'potato': 
+                    case Humburger.STUFFING_POTATO: 
                         stuffing = 15;
                         break;
                     default:
@@ -83,10 +82,10 @@
                 let size;
 
                 switch(this.size) {
-                    case 'small':
+                    case Humburger.SIZE_SMALL:
                         size = 20;
                         break;
-                    case 'big':
+                    case Humburger.SIZE_BIG:
                         size = 40;
                         break;
                     default:
@@ -96,13 +95,13 @@
                 let stuffing;
 
                 switch(this.stuffing) {
-                    case 'cheese':
+                    case Humburger.STUFFING_CHEESE:
                         stuffing = 20;
                         break;
-                    case 'salad':
+                    case Humburger.STUFFING_SALAD:
                         stuffing = 5;
                         break;
-                    case 'potato': 
+                    case Humburger.STUFFING_POTATO: 
                         stuffing = 10;
                         break;
                     default:
@@ -111,8 +110,8 @@
 
                 let topping = 0;
 
-                if( this.topping.find( item => item === 'mayo' ) ) topping += 5; 
-                if( this.topping.find( item => item === 'sauce' ) ) topping += 0; 
+                if( this.topping.find( item => item === this.TOPPING_MAYO ) ) topping += 5; 
+                if( this.topping.find( item => item === this.TOPPING_SAUCE ) ) topping += 0; 
 
                 this.totalCalories = size + stuffing + topping
                 return console.log(`Calories: ${this.totalCalories} calories`);
@@ -120,19 +119,20 @@
 
         }
 
-        let humburger1 = new Humburger(SIZE_SMALL, STUFFING_POTATO);
-        humburger1.addTopping(TOPPING_MAYO);
-
+        let humburger1 = new Humburger(Humburger.SIZE_SMALL, Humburger.STUFFING_POTATO);
+        humburger1.addTopping(Humburger.TOPPING_SAUCE);
+        humburger1.addTopping(Humburger.TOPPING_SAUCE);
+        
         console.log(humburger1);
         console.log(humburger1.calculatePrice());
         console.log(humburger1.calculate());
 
-        humburger1.addTopping(TOPPING_SAUCE);
+        humburger1.addTopping(Humburger.TOPPING_MAYO);
         console.log(humburger1.calculatePrice());
 
-        let humburger2 = new Humburger(SIZE_BIG, STUFFING_SALAD)
-        humburger2.addTopping(TOPPING_SAUCE)
-        humburger2.addTopping(TOPPING_SAUCE)
+        let humburger2 = new Humburger(Humburger.SIZE_BIG, Humburger.STUFFING_SALAD)
+        humburger2.addTopping(Humburger.TOPPING_SAUCE)
+        humburger2.addTopping(Humburger.TOPPING_SAUCE)
         console.log(humburger2);
         console.log(humburger2.calculatePrice());
         console.log(humburger2.calculate());
