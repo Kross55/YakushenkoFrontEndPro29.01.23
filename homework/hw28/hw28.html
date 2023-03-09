@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <h1>Picture</h1>
+    <img class="img" src="" alt="some img">
+
+    <script>
+        // 28 
+        let img = document.querySelector( '.img' );
+        img.style.width = '200px'
+        console.log(img);
+        const pictureNumber = Math.ceil(Math.random() * 9);
+        console.log(pictureNumber)
+        img.setAttribute('src', `images/${pictureNumber}.jpg`)
+       
+    </script>
+</body>
+</html>
