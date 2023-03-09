@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table td {
+            padding: 20px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body> 
+    <div id="draft"></div>
+
+    <script>
+        // 27
+        const draft = document.querySelector('#draft');
+
+        createTable(draft, 10, 10);
+
+        function createTable(parent, cols, rows) {
+            const table = document.createElement('table');
+
+            for(let i = 0; i < rows; i++) {
+                const tr = document.createElement('tr');
+
+                for(let j = 0; j < cols; j++) {
+                    const td = document.createElement('td');
+                    
+                    tr.appendChild(td);
+                }
+
+                table.appendChild(tr);
+            }
+
+            parent.appendChild(table);
+        }
+
+        const arrTd = document.querySelectorAll('td');
+        for(let i = 0; i < 100; i++) {
+            arrTd[i].innerHTML = i + 1;
+        }
+
+
+        
+        
+    </script>
+</body>
+</html>
