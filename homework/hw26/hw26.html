@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <h1>Title</h1>
+    
+    <span>
+        <input id="focus"></input>
+    </span>
+
+    <script>
+        // 26 
+        let text = document.querySelector('input');
+        console.log(text);
+        let div = document.createElement('span');
+        div.innerHTML = 'div';
+        console.log(div);
+        //document.body.append(div);
+        text.addEventListener("focusin", myFocusFunction);
+        text.addEventListener("focusout", myBlurFunction);
+
+        function myFocusFunction() {
+            document.body.append(div);
+        }
+
+        function myBlurFunction() {
+            document.body.removeChild(div);
+        }
+    </script>
+</body>
+</html>
