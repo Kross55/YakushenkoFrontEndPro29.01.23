@@ -10,26 +10,26 @@
     <h1>Title</h1>
     
     <span>
-        <input id="focus"></input>
+        <input class='focus'></input>
     </span>
+    <span class='div'></span>
 
     <script>
         // 26 
-        let text = document.querySelector('input');
-        console.log(text);
-        let div = document.createElement('span');
-        div.innerHTML = 'div';
-        console.log(div);
-        //document.body.append(div);
-        text.addEventListener("focusin", myFocusFunction);
-        text.addEventListener("focusout", myBlurFunction);
+        const text = document.querySelector('.focus');
+        
+        const div = document.querySelector('.div');
+        
+        text.addEventListener("focus", myFocusFunction );
+
+        text.addEventListener("blur", myBlurFunction );
 
         function myFocusFunction() {
-            document.body.append(div);
+            div.innerHTML = 'div';
         }
 
         function myBlurFunction() {
-            document.body.removeChild(div);
+            div.innerHTML = '';
         }
     </script>
 </body>
