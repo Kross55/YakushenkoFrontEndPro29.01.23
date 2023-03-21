@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="hw32.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="slider">
+            <img src="images/3.jpg" alt="slide 1" width = '200px'>
+            <img src="images/4.jpg" alt="slide 2" width = '200px'>
+            <img src="images/5.jpg" alt="slide 3" width = '200px'>
+        </div>
+        <button id="btnPrev">PREV</button>
+        <button id="btnNext">NEXT</button>
+        
+
+        <script>
+            // 33
+            //Написати слайдер
+            const slider = document.querySelector('#slider');
+            const sliderItems = Array.from(slider.children);
+            const btnPrev = document.querySelector('#btnPrev');
+            const btnNext = document.querySelector('#btnNext');
+
+            sliderItems.forEach( (slide, index) => {
+                if(index !== 0) slide.classList.add('hidden');
+
+                slide.dataset.index = index;
+
+                sliderItems[0].setAttribute('data-active', '');
+            })
+
+            //btnHidden
+
+            btnNext.addEventListener('click', function () {
+                const currentSlide = slider.querySelector('[data-active]');
+
+                currentSlide.classList.add('hidden');
+                currentSlide.removeAttribute('data-active');
+
+                const currentSlideIndex = +currentSlide.dataset.index;
+                const nextSlideIndex = currentSlideIndex + 1 === sliderItems.length 
+                    ? currentSlideIndex 
+                    : currentSlideIndex + 1;
+
+                const nextSlide = slider.querySelector(`[data-index='${nextSlideIndex}']`);
+                nextSlide.classList.remove('hidden');
+                nextSlide.setAttribute('data-active', '');
+
+            })
+            
+            btnPrev.addEventListener('click', function () {
+                const currentSlide = slider.querySelector('[data-active]');
+                
+                //if (currentSlide === 0) btnPrev.classList.add('hidden');
+
+                currentSlide.classList.add('hidden');
+                currentSlide.removeAttribute('data-active');
+
+                const currentSlideIndex = +currentSlide.dataset.index;
+                const nextSlideIndex = currentSlideIndex - 1 < 0 
+                    ? 0 
+                    : currentSlideIndex - 1;
+
+                const nextSlide = slider.querySelector(`[data-index='${nextSlideIndex}']`);
+                nextSlide.classList.remove('hidden');
+                nextSlide.setAttribute('data-active', '');
+
+            })
+
+           
+            
+
+        </script>
+    </body>
+</html>
