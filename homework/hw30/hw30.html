@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Results</title>
+    <style>
+        .emoticon {
+            font-size: 48px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .voutesNumber {
+            font-size: 23px;
+            margin-right: 10px; 
+        }
+      </style>
+</head>
+<body> 
+    <div id='voting-options'>
+        <span class='emoticon' id='emoticon-1'>😃</span>
+        <span class='emoticon' id='emoticon-2'>😄</span>
+        <span class='emoticon' id='emoticon-3'>😊</span>
+        <span class='emoticon' id='emoticon-4'>😍</span>
+        <span class='emoticon' id='emoticon-5'>🤩</span>
+    </div>
+    <div id='voting-results'></div>
+
+    <script>
+
+        // 30
+        //Створити програму для відображення результатів голосування. З наступними умовами:
+        //1.Як варіанти відповіді - смайлики. За замовчуванням, 5шт.
+        //2.Виведення даних - смайлики в один рядок, під ними - кількість тих, хто проголосував за кожен смайл.
+        //3.При натисканні на смайл - під ним змінюється значення лічильника.
+        //4.Реалізувати таким чином, щоб додавання нових варіантів відповіді не вело до додавання нових функцій.
+
+        const emoticons = {
+            '😃': 0,
+            '😄': 0,
+            '😊': 0,
+            '😍': 0,
+            '🤩': 0,
+        };
+
+        const updateResults = () => {
+            const resultsDiv = document.querySelector('#voting-results');
+            resultsDiv.innerHTML = '';
+
+            Object.keys(emoticons).forEach((emoticon) => {
+                const count = emoticons[emoticon];
+                const emoticonSpan = document.createElement('span');
+                emoticonSpan.className = 'voutesNumber'
+                emoticonSpan.innerHTML = emoticon + ' (' + count + ') ';
+                resultsDiv.appendChild(emoticonSpan);
+            });
+        };
+
+        const handleEmoticonClick = (event) => {
+            const emoticonId = event.target.id;
+            emoticons[event.target.innerHTML]++;
+            updateResults();
+        };
+
+        const emoticonElements = document.querySelectorAll('.emoticon');
+            for (let i = 0; i < emoticonElements.length; i++) {
+            emoticonElements[i].addEventListener('click', handleEmoticonClick);
+        }
+
+        updateResults();
+        
+
+          
+    </script>
+</body>
+</html>
