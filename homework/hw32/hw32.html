@@ -12,6 +12,8 @@
             <img src="images/3.jpg" alt="slide 1" width = '200px'>
             <img src="images/4.jpg" alt="slide 2" width = '200px'>
             <img src="images/5.jpg" alt="slide 3" width = '200px'>
+            <img src="images/6.jpg" alt="slide 3" width = '200px'>
+            <img src="images/7.jpg" alt="slide 3" width = '200px'>
         </div>
         <button id="btnPrev">PREV</button>
         <button id="btnNext">NEXT</button>
@@ -33,9 +35,13 @@
                 sliderItems[0].setAttribute('data-active', '');
             })
 
+            btnPrev.classList.add('hidden');
+
             //btnHidden
 
             btnNext.addEventListener('click', function () {
+
+                btnPrev.classList.remove('hidden');
                 const currentSlide = slider.querySelector('[data-active]');
 
                 currentSlide.classList.add('hidden');
@@ -50,9 +56,14 @@
                 nextSlide.classList.remove('hidden');
                 nextSlide.setAttribute('data-active', '');
 
+                if(nextSlideIndex === sliderItems.length - 1) btnNext.classList.add('hidden');
+
+
             })
             
             btnPrev.addEventListener('click', function () {
+
+                btnNext.classList.remove('hidden');
                 const currentSlide = slider.querySelector('[data-active]');
                 
                 //if (currentSlide === 0) btnPrev.classList.add('hidden');
@@ -68,6 +79,7 @@
                 const nextSlide = slider.querySelector(`[data-index='${nextSlideIndex}']`);
                 nextSlide.classList.remove('hidden');
                 nextSlide.setAttribute('data-active', '');
+                if(nextSlideIndex === 0) btnPrev.classList.add('hidden');
 
             })
 
