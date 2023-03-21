@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="hw31.css">
+    <title>Document</title>
+</head>
+<body> 
+
+    <div class="container">
+        <div class="categories">
+            <h2>Categories</h2>
+            <ul>
+                <li><a href="#" class="category">Category 1</a></li>
+                <li><a href="#" class="category">Category 2</a></li>
+                <li><a href="#" class="category">Category 3</a></li>
+            </ul>
+        </div>
+        <div class="products">
+            <h2>Products</h2>
+            <ul></ul>
+        </div>
+        <div class="product-info">
+            <h2>Product Information</h2>
+            <p></p>
+            <button class="buy-btn hidden">Buy</button>
+        </div>
+    </div>
+      
+
+    <script>
+
+        // 31
+        //Дано 3 блоки
+        //1. В лівій частині сторінки - перелік категорій.
+        //2. При натисканні на категорію в середній блок виводиться список товарів цієї категорії.
+        //3. Клік на товар - інформацію про товар у правому блоці.
+        //4. В інформації товару - кнопка “купити”.
+        //5. При натисканні на “купити” з'являється повідомлення, що товар куплений 
+        // і повернення у вихідний стан програми ( коли відображається лише список категорій).
+        
+        const categories = document.querySelectorAll('.category');
+        const products = document.querySelector('.products ul');
+        const productInfo = document.querySelector('.product-info');
+
+        const categoryProducts = {
+            'Category 1': ['Product 1', 'Product 2', 'Product 3'],
+            'Category 2': ['Product 4', 'Product 5', 'Product 6'],
+            'Category 3': ['Product 7', 'Product 8', 'Product 9']
+        };
+
+        // show products of the selected category
+        categories.forEach(category => {
+            category.addEventListener('click', () => {
+                products.innerHTML = '';
+                const categoryName = category.textContent;
+                const categoryProductsList = categoryProducts[categoryName];
+                categoryProductsList.forEach(product => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = '#';
+                    a.textContent = product;
+                    li.appendChild(a);
+                    products.appendChild(li);
+                });
+            });
+        });
+
+        // show product information on click
+        products.addEventListener('click', event => {
+            if (event.target.tagName === 'A') {
+                const productName = event.target.textContent;
+                const productDescription = `This is ${productName}.`;
+                productInfo.querySelector('p').textContent = productDescription;
+                productInfo.classList.add('show');
+                buyBtn.classList.remove('hidden');
+            }
+        });
+
+        // buy button functionality
+        const buyBtn = document.querySelector('.buy-btn');
+        buyBtn.addEventListener('click', () => {
+            alert('Product purchased!');
+            productInfo.querySelector('p').textContent = '';
+            products.innerHTML = '';
+            buyBtn.classList.add('hidden');
+        });
+
+
+
+
+          
+    </script>
+</body>
+</html>
