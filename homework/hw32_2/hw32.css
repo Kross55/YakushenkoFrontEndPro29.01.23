@@ -1,0 +1,30 @@
+#slider {
+    position: relative;
+  }
+  #slider img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    max-width: 100%;
+    height: auto;
+  }
+  #prevBtn, #nextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: #fff;
+    background-color: #333;
+    cursor: pointer;
+  }
+  #prevBtn {
+    left: 0;
+  }
+  #nextBtn {
+    right: 0;
+  }
+  
