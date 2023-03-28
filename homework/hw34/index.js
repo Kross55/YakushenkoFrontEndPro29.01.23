@@ -2,19 +2,19 @@ const form = document.getElementById('registration-form');
 const table = document.getElementById('registration-data');
 
 form.addEventListener('submit', (e) => {
-  e.preventDefault(); // prevent form submission
+  e.preventDefault(); 
 
-  const formData = new FormData(form); // get form data
-  const tableRow = document.createElement('tr'); // create table row
+  const formData = new FormData(form); 
+  const tableRow = document.createElement('tr'); 
 
   formData.forEach((value, key) => {
-    const tableData = document.createElement('td'); // create table data cell
-    tableData.textContent = value; // set cell text content
-    tableRow.appendChild(tableData); // add cell to row
+    const tableData = document.createElement('td'); 
+    tableData.textContent = value; 
+    tableRow.appendChild(tableData);
   });
 
-  table.querySelector('tbody').appendChild(tableRow); // add row to table
-  form.reset(); // reset form fields
-  form.style.display = 'none'; // hide form
-  table.style.display = 'table'; // show table
+  table.querySelector('tbody').appendChild(tableRow); 
+  form.reset(); 
+  form.style.display = 'none';
+  table.style.display = 'table';
 });
