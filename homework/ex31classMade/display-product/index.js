@@ -2,84 +2,90 @@
  * https://dummyjson.com/docs/products */
 
 fetch("./products.json")
-    .then(res => res.json())
-    .then(data => {
-        const productsById = data.products.reduce((indexedBy, item) => {
-            indexedBy[item.id] = item;
+  .then((res) => res.json())
+  .then((data) => {
+    const productsById = data.products.reduce((indexedBy, item) => {
+      indexedBy[item.id] = item;
 
-            return indexedBy;
-        }, {});
-        const productsByCategory = data.products.reduce((indexedBy, item) => {
-            if (!Array.isArray(indexedBy[item.category])) {
-                indexedBy[item.category] = [];
-            }
+      return indexedBy;
+    }, {});
+    const productsByCategory = data.products.reduce((indexedBy, item) => {
+      if (!Array.isArray(indexedBy[item.category])) {
+        indexedBy[item.category] = [];
+      }
 
-            indexedBy[item.category].push(item);
+      indexedBy[item.category].push(item);
 
-            return indexedBy;
-        }, {});
-        const categoriesList = Object.keys(productsByCategory);
-        let selectedCategory = categoriesList[0];
-        let selectedProduct = productsByCategory[selectedCategory][0].id;
+      return indexedBy;
+    }, {});
+    const categoriesList = Object.keys(productsByCategory);
+    let selectedCategory = categoriesList[0];
+    let selectedProduct = productsByCategory[selectedCategory][0].id;
 
-        const containerCategories = document.querySelector("[data-component=\"categories\"]");
-        const containerProducts = document.querySelector("[data-component=\"products\"]");
-        const containerDetails = document.querySelector("[data-component=\"details\"]");
-        const containerImages = document.querySelector("[data-component=\"images\"]");
+    const containerCategories = document.querySelector(
+      '[data-component="categories"]'
+    );
+    const containerProducts = document.querySelector(
+      '[data-component="products"]'
+    );
+    const containerDetails = document.querySelector(
+      '[data-component="details"]'
+    );
+    const containerImages = document.querySelector('[data-component="images"]');
 
-        containerCategories.addEventListener("click", handleCategory);
-        containerProducts.addEventListener("click", handleProduct);
-        containerDetails.addEventListener("click", handlePurchase);
+    containerCategories.addEventListener("click", handleCategory);
+    containerProducts.addEventListener("click", handleProduct);
+    containerDetails.addEventListener("click", handlePurchase);
 
-        renderCategories();
-        renderProducts();
-        renderDetails();
-        renderImages();
+    renderCategories();
+    renderProducts();
+    renderDetails();
+    renderImages();
 
-        /**
-         * Render categories list */
-        function renderCategories() {
-            containerCategories.innerHTML = "";
+    /**
+     * Render categories list */
+    function renderCategories() {
+      containerCategories.innerHTML = "";
 
-            categoriesList.forEach(category => {
-                const link = document.createElement("button");
+      categoriesList.forEach((category) => {
+        const link = document.createElement("button");
 
-                link.setAttribute("class", "nav-link");
-                link.setAttribute("data-category", category);
-                link.textContent = category;
+        link.setAttribute("class", "nav-link");
+        link.setAttribute("data-category", category);
+        link.textContent = category;
 
-                if (category === selectedCategory) {
-                    link.classList.add("active");
-                }
-
-                containerCategories.append(link);
-            });
+        if (category === selectedCategory) {
+          link.classList.add("active");
         }
 
-        /**
-         * Render products list */
-        function renderProducts() {
-            containerProducts.innerHTML = "";
+        containerCategories.append(link);
+      });
+    }
 
-            productsByCategory[selectedCategory].forEach(product => {
-                const link = document.createElement("button");
+    /**
+     * Render products list */
+    function renderProducts() {
+      containerProducts.innerHTML = "";
 
-                link.setAttribute("class", "nav-link");
-                link.setAttribute("data-product", product.id);
-                link.textContent = product.title;
+      productsByCategory[selectedCategory].forEach((product) => {
+        const link = document.createElement("button");
 
-                if (product.id === selectedProduct) {
-                    link.classList.add("active");
-                }
+        link.setAttribute("class", "nav-link");
+        link.setAttribute("data-product", product.id);
+        link.textContent = product.title;
 
-                containerProducts.append(link);
-            });
+        if (product.id === selectedProduct) {
+          link.classList.add("active");
         }
 
-        function renderDetails() {
-            const product = productsById[selectedProduct];
+        containerProducts.append(link);
+      });
+    }
 
-            containerDetails.innerHTML = `
+    function renderDetails() {
+      const product = productsById[selectedProduct];
+
+      containerDetails.innerHTML = `
        <div class="card">
          <img src="${product.thumbnail}" class="card-img-top p-3" alt="${product.title}">
          <div class="card-body">
@@ -94,77 +100,100 @@ fetch("./products.json")
          </ul>
          <div class="card-body">
            <button data-purchase="${product.id}" class="btn btn-primary">Purchase</button>
+
+           <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Launch demo modal
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" data-purchase="${product.id}" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
          </div>
        </div>
      `;
+    }
+
+    function renderImages() {
+      const product = productsById[selectedProduct];
+
+      const images = product.images.map(
+        (image) =>
+          `<img src="${image}" class="img-thumbnail p-3 mb-3" alt="${product.title}">`
+      );
+
+      containerImages.innerHTML = images.join("\n");
+    }
+
+    function handleCategory(event) {
+      if (event.target.hasAttribute("data-category")) {
+        const candidateCategory = event.target.getAttribute("data-category");
+
+        if (candidateCategory === selectedCategory) {
+          return;
         }
 
-        function renderImages() {
-            const product = productsById[selectedProduct];
+        document
+          .querySelector(`[data-category="${selectedCategory}"]`)
+          .classList.remove("active");
 
-            const images = product.images.map(image => `<img src="${image}" class="img-thumbnail p-3 mb-3" alt="${product.title}">`);
+        document
+          .querySelector(`[data-category="${candidateCategory}"]`)
+          .classList.add("active");
 
-            containerImages.innerHTML = images.join("\n");
+        selectedCategory = candidateCategory;
+        selectedProduct = productsByCategory[selectedCategory][0].id;
+
+        renderProducts();
+        renderDetails();
+        renderImages();
+      }
+    }
+
+    function handleProduct(event) {
+      if (event.target.hasAttribute("data-product")) {
+        const candidateProduct = event.target.getAttribute("data-product");
+
+        if (candidateProduct === selectedProduct) {
+          return;
         }
 
-        function handleCategory(event) {
-            if (event.target.hasAttribute("data-category")) {
-                const candidateCategory = event.target.getAttribute("data-category");
+        document
+          .querySelector(`[data-product="${selectedProduct}"]`)
+          .classList.remove("active");
 
-                if (candidateCategory === selectedCategory) {
-                    return;
-                }
+        document
+          .querySelector(`[data-product="${candidateProduct}"]`)
+          .classList.add("active");
 
-                document
-                    .querySelector(`[data-category="${selectedCategory}"]`)
-                    .classList
-                    .remove("active");
+        selectedProduct = candidateProduct;
 
-                document
-                    .querySelector(`[data-category="${candidateCategory}"]`)
-                    .classList
-                    .add("active");
+        renderDetails();
+        renderImages();
+      }
+    }
 
-                selectedCategory = candidateCategory;
-                selectedProduct = productsByCategory[selectedCategory][0].id;
+    function handlePurchase(event) {
+      if (event.target.hasAttribute("data-purchase")) {
+        // const candidateProduct = event.target.getAttribute("data-purchase");
+        const product = productsById[selectedProduct];
 
-                renderProducts();
-                renderDetails();
-                renderImages();
-            }
-        }
-
-        function handleProduct(event) {
-            if (event.target.hasAttribute("data-product")) {
-                const candidateProduct = event.target.getAttribute("data-product");
-
-                if (candidateProduct === selectedProduct) {
-                    return;
-                }
-
-                document
-                    .querySelector(`[data-product="${selectedProduct}"]`)
-                    .classList
-                    .remove("active");
-
-                document
-                    .querySelector(`[data-product="${candidateProduct}"]`)
-                    .classList
-                    .add("active");
-
-                selectedProduct = candidateProduct;
-
-                renderDetails();
-                renderImages();
-            }
-        }
-
-        function handlePurchase(event) {
-            if (event.target.hasAttribute("data-purchase")) {
-                // const candidateProduct = event.target.getAttribute("data-purchase");
-                const product = productsById[selectedProduct];
-
-                alert(`Product ${product.title} has been bought successfully.`);
-            }
-        }
-    });
+        alert(`Product ${product.title} has been bought successfully.`);
+      }
+    }
+  });
