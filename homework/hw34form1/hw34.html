@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- hw34 -->
+    <!-- form -->
+    
+    <form id="registration-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" required>
+        <br>
+        <label for="dob">Date of Birth:</label>
+        <input type="text" id="dob" name="dob" placeholder="MM/DD/YYYY" required>
+        <br>
+        <label for="sex">Sex:</label>
+        <label><input type="radio" name="sex" value="male">Male</label>
+        <label><input type="radio" name="sex" value="female">Female</label>
+        <br>
+        <label for="city">City:</label>
+        <select id="city" name="city" required>
+            <option value="">Select a city</option>
+            <option value="new-york">Odesa</option>
+            <option value="los-angeles">Reni</option>
+            <option value="chicago">Izmail</option>
+        </select>
+        <br>
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required></textarea>
+        <br>
+        <label for="languages">Languages Spoken:</label>
+        <label><input type="checkbox" name="languages" value="english">English</label>
+        <label><input type="checkbox" name="languages" value="spanish">Spanish</label>
+        <label><input type="checkbox" name="languages" value="french">Ukrainian</label>
+        <br>
+        <button type="submit">Save</button>
+    </form>
+
+    <table id="registration-data" style="display:none;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Date of Birth</th>
+                <th>Sex</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Languages Spoken</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script src='/homework/hw34/index.js'></script>
+
+</body>
+
+</html>
