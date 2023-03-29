@@ -14,6 +14,7 @@ form.addEventListener('submit', (e) => {
     });
 
     table.querySelector('tbody').appendChild(tableRow);
+    
     form.reset();
     form.style.display = 'none';
     table.style.display = 'table';
