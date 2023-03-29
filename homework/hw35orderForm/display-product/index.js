@@ -18,6 +18,7 @@ fetch("./products.json")
 
       return indexedBy;
     }, {});
+
     const categoriesList = Object.keys(productsByCategory);
     let selectedCategory = categoriesList[0];
     let selectedProduct = productsByCategory[selectedCategory][0].id;
@@ -43,7 +44,7 @@ fetch("./products.json")
     renderImages();
 
     /**
-     * Render categories list */
+    * Render categories list */
     function renderCategories() {
       containerCategories.innerHTML = "";
 
@@ -223,7 +224,7 @@ fetch("./products.json")
         const orderForm = document.querySelector('#order-form');
 
         orderForm.style.display = 'block';
-        
+
         //alert(`Product ${product.title} has been bought successfully.`);
       }
     }
