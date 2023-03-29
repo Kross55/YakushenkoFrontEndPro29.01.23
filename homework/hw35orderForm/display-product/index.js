@@ -86,24 +86,52 @@ fetch("./products.json")
       const product = productsById[selectedProduct];
 
       containerDetails.innerHTML = `
-       <div class="card">
-         <img src="${product.thumbnail}" class="card-img-top p-3" alt="${product.title}">
-         <div class="card-body">
-           <h5 class="card-title">${product.title}</h5>
-           <p class="card-text">${product.description}</p>
-         </div>
-         <ul class="list-group list-group-flush">
-           <li class="list-group-item"><strong>Price:</strong> ${product.price}EUR</li>
-           <li class="list-group-item"><strong>Discount:</strong> ${product.discountPercentage}%</li>
-           <li class="list-group-item"><strong>Rating:</strong> ${product.rating}⭐</li>
-           <li class="list-group-item"><strong>Brand:</strong> ${product.brand}🏢</li>
-         </ul>
-         <div class="card-body">
-           <button data-purchase="${product.id}" class="btn btn-primary">Purchase</button>
-
-           <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Launch demo modal
+        <div class="card">
+          <img src="${product.thumbnail}" class="card-img-top p-3" alt="${product.title}">
+          <div class="card-body">
+            <h5 class="card-title">${product.title}</h5>
+            <p class="card-text">${product.description}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Price:</strong> ${product.price}EUR</li>
+            <li class="list-group-item"><strong>Discount:</strong> ${product.discountPercentage}%</li>
+            <li class="list-group-item"><strong>Rating:</strong> ${product.rating}⭐</li>
+            <li class="list-group-item"><strong>Brand:</strong> ${product.brand}🏢</li>
+          </ul>
+          <div class="card-body">
+            <button data-purchase="${product.id}" class="btn btn-primary">Purchase</button> 
+          </div>
+          
+          <form id="order-form" style='display:none'>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        
+            <label for="city">City:</label>
+            <select id="city" name="city" required>
+              <option value="">Select a city</option>
+              <option value="Kiev">Kiev</option>
+              <option value="Lviv">Lviv</option>
+              <option value="Odessa">Odessa</option>
+            </select>
+        
+            <label for="mail-composition">Composition of New Mail:</label>
+            <input type="text" id="mail-composition" name="mail-composition" required>
+        
+            <label for="payment-method">Payment Method:</label>
+            <input type="radio" id="postpaid" name="payment-method" value="postpaid" required>
+            <label for="postpaid">Postpaid</label>
+            <input type="radio" id="bank-card" name="payment-method" value="bank-card" required>
+            <label for="bank-card">Bank Card</label>
+        
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required>
+        
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment"></textarea>
+        
+            <!-- Button trigger modal -->
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Launch demo modal
             </button>
 
             <!-- Modal -->
@@ -119,13 +147,13 @@ fetch("./products.json")
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" data-purchase="${product.id}" class="btn btn-primary">Save changes</button>
+                            <button type="button" data-finishOrder= data-purchase="${product.id}" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
-         </div>
-       </div>
+        </form>
+      </div>
      `;
     }
 
@@ -192,8 +220,34 @@ fetch("./products.json")
       if (event.target.hasAttribute("data-purchase")) {
         // const candidateProduct = event.target.getAttribute("data-purchase");
         const product = productsById[selectedProduct];
+        const orderForm = document.querySelector('#order-form');
 
-        alert(`Product ${product.title} has been bought successfully.`);
+        orderForm.style.display = 'block';
+        
+        //alert(`Product ${product.title} has been bought successfully.`);
       }
+    }
+
+    const orderForm = document.querySelector('#order-form');
+
+    orderForm.addEventListener('submit', verifyUserData);
+
+    function verifyUserData(event) {
+      const nameInput = document.querySelector('#name');
+      const citySelect = document.querySelector('#city');
+      const mailCompositionInput = document.querySelector('#mail-composition');
+      const paymentMethodRadio = document.querySelector('input[name="payment-method"]:checked');
+      const quantityInput = document.querySelector('#quantity');
+
+      if (!nameInput.value || !citySelect.value || !mailCompositionInput.value || !paymentMethodRadio || !quantityInput.value) {
+        event.preventDefault();
+        alert('Please fill in all mandatory fields');
+      }
+    }
+
+    function displayOrderInformation() {
+      const nameInput = document.querySelector('#name');
+      const citySelect = document.querySelector('#city');
+      const mailCompositionInput = document.querySelector('#mail-composition');
     }
   });
