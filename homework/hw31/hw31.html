@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,8 @@
     <link rel="stylesheet" href="hw31.css">
     <title>Document</title>
 </head>
-<body> 
+
+<body>
 
     <div class="container">
         <div class="categories">
@@ -24,74 +26,54 @@
         </div>
         <div class="product-info">
             <h2>Product Information</h2>
-            <p></p>
-            <button class="buy-btn hidden">Buy</button>
+            <p id="product-name"></p>
+            <!--<button class="buy-btn hidden">Buy</button>-->
+            <button class="order-btn hidden" id="order-product-button">Order product</button>
+
+            <div id="order-form" style="display:none">
+                <h2>Order registration</h2>
+                <form>
+                    <label>Name:</label>
+                    <input type="text" id="name-input" required><br>
+
+                    <label>City:</label>
+                    <select id="city-select" required>
+                        <option value="">Select city</option>
+                        <option value="Odesa">Odesa</option>
+                        <option value="Reni">Reni</option>
+                        <option value="Izmail">Izmail</option>
+                    </select><br>
+
+                    <label>Post office for sending:</label>
+                    <input type="text" id="post-office-input" required><br>
+
+                    <label>Payment method:</label><br>
+                    <input type="radio" id="postpaid-radio" name="payment" value="postpaid" required>
+                    <label for="postpaid-radio">Postpaid</label><br>
+                    <input type="radio" id="card-radio" name="payment" value="card" required>
+                    <label for="card-radio">Bank card</label><br>
+
+                    <label>Quantity:</label>
+                    <input type="number" id="quantity-input" min="1" required><br>
+
+                    <label>Comment:</label>
+                    <textarea id="comment-input"></textarea><br>
+
+                    <button id="buy-btn" type="submit">Buy product</button>
+                </form>
+            </div>
+
+            <div id="order-confirmation" style="display:none">
+                <h2>Order confirmation</h2>
+                <p id="product-info">A</p>
+                <p id="delivery-info">B</p>
+            </div>
+
         </div>
     </div>
-      
 
-    <script>
-
-        // 31
-        //Дано 3 блоки
-        //1. В лівій частині сторінки - перелік категорій.
-        //2. При натисканні на категорію в середній блок виводиться список товарів цієї категорії.
-        //3. Клік на товар - інформацію про товар у правому блоці.
-        //4. В інформації товару - кнопка “купити”.
-        //5. При натисканні на “купити” з'являється повідомлення, що товар куплений 
-        // і повернення у вихідний стан програми ( коли відображається лише список категорій).
-        
-        const categories = document.querySelectorAll('.category');
-        const products = document.querySelector('.products ul');
-        const productInfo = document.querySelector('.product-info');
-
-        const categoryProducts = {
-            'Category 1': ['Product 1', 'Product 2', 'Product 3'],
-            'Category 2': ['Product 4', 'Product 5', 'Product 6'],
-            'Category 3': ['Product 7', 'Product 8', 'Product 9']
-        };
-
-        // show products of the selected category
-        categories.forEach(category => {
-            category.addEventListener('click', () => {
-                products.innerHTML = '';
-                const categoryName = category.textContent;
-                const categoryProductsList = categoryProducts[categoryName];
-                categoryProductsList.forEach(product => {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = '#';
-                    a.textContent = product;
-                    li.appendChild(a);
-                    products.appendChild(li);
-                });
-            });
-        });
-
-        // show product information on click
-        products.addEventListener('click', event => {
-            if (event.target.tagName === 'A') {
-                const productName = event.target.textContent;
-                const productDescription = `This is ${productName}.`;
-                productInfo.querySelector('p').textContent = productDescription;
-                productInfo.classList.add('show');
-                buyBtn.classList.remove('hidden');
-            }
-        });
-
-        // buy button functionality
-        const buyBtn = document.querySelector('.buy-btn');
-        buyBtn.addEventListener('click', () => {
-            alert('Product purchased!');
-            productInfo.querySelector('p').textContent = '';
-            products.innerHTML = '';
-            buyBtn.classList.add('hidden');
-        });
-
-
-
-
-          
-    </script>
+    <script src="/homework/hw31/hw31.js"></script>
+    <script></script>
 </body>
+
 </html>
