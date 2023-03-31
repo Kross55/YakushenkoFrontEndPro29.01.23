@@ -52,7 +52,7 @@ products.addEventListener('click', event => {
         const productDescription = `This is ${productName}.`;
         productInfo.querySelector('p').textContent = productDescription;
         productInfo.classList.add('show');
-        orderBtn.classList.remove('hidden');
+        orderBtn.style.display = "block";
         orderConfirmation.style.display = "none";
     }
 });
@@ -64,7 +64,7 @@ const orderForm = document.querySelector("#order-form");
 orderBtn.addEventListener("click", showOrderForm);
 
 function showOrderForm() {
-    orderBtn.classList.add('hidden');
+    orderBtn.style.display = "none";
     orderForm.style.display = "block";
 }
 
