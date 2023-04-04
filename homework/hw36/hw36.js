@@ -28,28 +28,82 @@ const categories = document.querySelectorAll('.category');
 const products = document.querySelector('.products ul');
 const productInfo = document.querySelector('.product-info');
 
-const categoryProducts = {
-    'Category 1': ['Product 1', 'Product 2', 'Product 3'],
-    'Category 2': ['Product 4', 'Product 5', 'Product 6'],
-    'Category 3': ['Product 7', 'Product 8', 'Product 9']
+/*const categoryProducts = {
+    'Apple': [
+        {'name': 'iPhone 13', 'price': 11}, 
+        {'name': 'iPad', 'price': 12}, 
+        {'name': 'MacBook', 'price': 13}
+    ],
+    'Samsung': [
+        {'name': 'Galaxy12', 'price': 14}, 
+        {'name': 'SamsungLED', 'price': 15}, 
+        {'name': 'Samsung LapTop', 'price': 16}
+    ],
+    'Xiomi': [
+        {'name': 'phone1', 'price': 17}, 
+        {'name': 'monitor1', 'price': 18}, 
+        {'name': 'laptop1', 'price': 19}
+    ]
 };
+*/
+
+const productsArr = [
+    {'id': 1, 'name': 'iPhone 13', 'price': 11, 'category': 'Apple'}, 
+    {'id': 2, 'name': 'iPad', 'price': 12, 'category': 'Apple'}, 
+    {'id': 3, 'name': 'MacBook', 'price': 13, 'category': 'Apple'},
+    {'id': 4, 'name': 'Galaxy12', 'price': 14, 'category': 'Samsung'}, 
+    {'id': 5, 'name': 'SamsungLED', 'price': 15, 'category': 'Samsung'}, 
+    {'id': 6, 'name': 'Samsung LapTop', 'price': 16, 'category': 'Samsung'},
+    {'id': 7, 'name': 'phone1', 'price': 17, 'category': 'Xiomi'}, 
+    {'id': 8, 'name': 'monitor1', 'price': 18, 'category': 'Xiomi'}, 
+    {'id': 9, 'name': 'laptop1', 'price': 19, 'category': 'Xiomi'},
+];
+
+const productsById = productsArr.reduce((indexedBy, item) => {
+    indexedBy[item.id] = item;
+
+    return indexedBy;
+}, {});
+
+const productsByCategory = productsArr.reduce((indexedBy, item) => {
+    if (!Array.isArray(indexedBy[item.category])) {
+        indexedBy[item.category] = [];
+    }
+
+    indexedBy[item.category].push(item);
+
+    return indexedBy;
+}, {});
+
+const productsByName = productsArr.reduce((indexedBy, item) => {
+    indexedBy[item.name] = item;
+
+    return indexedBy;
+}, {});
+
+console.log(productsById);
+console.log(productsByCategory);
+console.log(productsByName);
+console.log(localStorage);
 
 // show products of the selected category
 categories.forEach(category => {
     category.addEventListener('click', () => {
         products.innerHTML = '';
         const categoryName = category.textContent;
-        const categoryProductsList = categoryProducts[categoryName];
+        const categoryProductsList = productsByCategory[categoryName];
         categoryProductsList.forEach(product => {
             const li = document.createElement('li');
             const a = document.createElement('a');
             a.href = '#';
-            a.textContent = product;
+            a.textContent = product['name'];
             li.appendChild(a);
             products.appendChild(li);
         });
     });
 });
+
+//const currentProduct 
 
 // show product information on click
 products.addEventListener('click', event => {
@@ -80,11 +134,13 @@ buyBtn.addEventListener("click", submitOrder);
 const orderConfirmation = document.querySelector("#order-confirmation")
 
 function submitOrder(event) {
+    const product = productsById['7'];
     event.preventDefault();
     if (validateForm()) {
         orderForm.style.display = "none";
         orderConfirmation.style.display = "block";
         displayOrderConfirmation();
+        localStorage.setItem(`${product['id']}`, JSON.stringify(product))
     }
 }
 
@@ -132,4 +188,16 @@ function displayOrderConfirmation() {
     productInfo.textContent = productInfoText;
     deliveryInfo.textContent = deliveryInfoText;
 
+}
+
+const purchaseListBtn = document.querySelector('#myPurchase');
+const purchaseList = document.querySelector('.purchaseList');
+const categoriesContainer = document.querySelector('.container');
+
+purchaseListBtn.addEventListener('click', showPurchaseList);
+
+function showPurchaseList() {
+    categoriesContainer.classList.add('hidden');
+    purchaseListBtn.style.display = 'none';
+    purchaseList.style.display = 'block';
 }
