@@ -48,12 +48,12 @@ const productInfo = document.querySelector('.product-info');
 */
 
 const productsArr = [
-    {'id': 1, 'name': 'iPhone 13', 'price': 11, 'category': 'Apple'}, 
+    {'id': 1, 'name': 'iPhone13', 'price': 11, 'category': 'Apple'}, 
     {'id': 2, 'name': 'iPad', 'price': 12, 'category': 'Apple'}, 
     {'id': 3, 'name': 'MacBook', 'price': 13, 'category': 'Apple'},
     {'id': 4, 'name': 'Galaxy12', 'price': 14, 'category': 'Samsung'}, 
     {'id': 5, 'name': 'SamsungLED', 'price': 15, 'category': 'Samsung'}, 
-    {'id': 6, 'name': 'Samsung LapTop', 'price': 16, 'category': 'Samsung'},
+    {'id': 6, 'name': 'SamsungLapTop', 'price': 16, 'category': 'Samsung'},
     {'id': 7, 'name': 'phone1', 'price': 17, 'category': 'Xiomi'}, 
     {'id': 8, 'name': 'monitor1', 'price': 18, 'category': 'Xiomi'}, 
     {'id': 9, 'name': 'laptop1', 'price': 19, 'category': 'Xiomi'},
@@ -84,7 +84,6 @@ const productsByName = productsArr.reduce((indexedBy, item) => {
 console.log(productsById);
 console.log(productsByCategory);
 console.log(productsByName);
-console.log(localStorage);
 
 // show products of the selected category
 categories.forEach(category => {
@@ -134,13 +133,11 @@ buyBtn.addEventListener("click", submitOrder);
 const orderConfirmation = document.querySelector("#order-confirmation")
 
 function submitOrder(event) {
-    const product = productsById['7'];
     event.preventDefault();
     if (validateForm()) {
         orderForm.style.display = "none";
         orderConfirmation.style.display = "block";
         displayOrderConfirmation();
-        localStorage.setItem(`${product['id']}`, JSON.stringify(product))
     }
 }
 
@@ -164,7 +161,8 @@ function validateForm() {
 
 function displayOrderConfirmation() {
     const p = document.getElementById("product-name");
-    const productName = p.innerHTML.slice(8, -1)
+    const productName = p.innerHTML.slice(8, -1);
+    const product = productsByName[productName];
 
     const name = document.getElementById("name-input").value.trim();
     const city = document.getElementById("city-select").value.trim();
@@ -188,11 +186,20 @@ function displayOrderConfirmation() {
     productInfo.textContent = productInfoText;
     deliveryInfo.textContent = deliveryInfoText;
 
+    product.date = new Date();
+    product.quantity = +quantity;
+    product.price *= product.quantity
+    console.log(product);
+
+    localStorage.setItem(`${product['id']}`, JSON.stringify(product));
+
 }
 
 const purchaseListBtn = document.querySelector('#myPurchase');
 const purchaseList = document.querySelector('.purchaseList');
 const categoriesContainer = document.querySelector('.container');
+const orderList = document.querySelector('#order-list');
+const totalPriceDiv = document.querySelector('#totalPrice')
 
 purchaseListBtn.addEventListener('click', showPurchaseList);
 
@@ -200,4 +207,55 @@ function showPurchaseList() {
     categoriesContainer.classList.add('hidden');
     purchaseListBtn.style.display = 'none';
     purchaseList.style.display = 'block';
+
+    const orders = [];
+    let keys = Object.keys(localStorage);
+    for(let key of keys) {
+        orders.push( JSON.parse(localStorage.getItem(key)) );
+    }
+
+    console.log(localStorage);
+    console.log(orders);
+  
+    // Clear the current order list
+    orderList.innerHTML = '';
+    totalPriceDiv.innerHTML = '';
+  
+    // Loop through the orders and add them to the order list
+    orders.forEach(order => {
+        const li = document.createElement('li');
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'X';
+
+        li.textContent = `${order.name} - ${order.quantity} item. Price: $ ${order.price} `;
+        li.append(deleteBtn);
+        orderList.appendChild(li);
+
+        deleteBtn.addEventListener('click', removeProductFromList);
+
+        function removeProductFromList() {
+            localStorage.removeItem(`${order.id}`);
+            showPurchaseList();
+        }
+    });
+
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1; 
+    const year = today.getFullYear();
+
+    const currentDate = `${day}/${month}/${year}`;
+
+    const totalPrice = orders.reduce( (sum, current) => {
+        return sum + current.price
+    }, 0)
+
+    console.log(totalPrice);
+    if(totalPrice === 0) {
+        totalPriceDiv.innerHTML = '';
+    } else {
+        totalPriceDiv.innerHTML = `${currentDate} Total $ ${totalPrice}`;
+    }  
+
 }
+
