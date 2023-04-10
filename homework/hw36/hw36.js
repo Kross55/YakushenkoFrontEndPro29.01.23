@@ -24,6 +24,8 @@
 
 */
 
+//const SOME_STORAGE_KEY = "STORAGE_KEY";
+
 const categories = document.querySelectorAll('.category');
 const products = document.querySelector('.products ul');
 const productInfo = document.querySelector('.product-info');
@@ -163,8 +165,23 @@ function displayOrderConfirmation() {
     const p = document.getElementById("product-name");
     const productName = p.innerHTML.slice(8, -1);
     const product = productsByName[productName];
+    
+    //to varify 'name' value
+    function normalize(rawValue) {
+        if (rawValue == null) {
+            return null;
+        }
+    
+        const value = (
+            typeof rawValue === 'string'
+                ? rawValue.trim()
+                : rawValue
+        );
+    
+        return value === '' ? null : value;
+    }
 
-    const name = document.getElementById("name-input").value.trim();
+    const name = normalize(document.getElementById("name-input").value);
     const city = document.getElementById("city-select").value.trim();
     const postOffice = document.getElementById("post-office-input").value.trim();
     const payment = document.querySelector('input[name="payment"]:checked').value;
@@ -193,6 +210,15 @@ function displayOrderConfirmation() {
 
     localStorage.setItem(`${product['id']}`, JSON.stringify(product));
 
+    /*
+    // Get products from LS, maybe saved before
+    const rawFromLS = localStorage.getItem(SOME_STORAGE_KEY);
+    const productsFromLS = rawFromLS == null ? {} : JSON.parse(rawFromLS);
+
+    productsFromLS[product.id] = product;
+
+    localStorage.setItem(SOME_STORAGE_KEY, JSON.stringify(productsFromLS));
+    */
 }
 
 const purchaseListBtn = document.querySelector('#myPurchase');
@@ -209,6 +235,15 @@ function showPurchaseList() {
     purchaseList.style.display = 'block';
 
     const orders = [];
+
+    /*
+    // Get products from LS, maybe saved before
+    const rawFromLS = localStorage.getItem(SOME_STORAGE_KEY);
+    const productsFromLS = rawFromLS == null ? {} : JSON.parse(rawFromLS);
+
+    const keys = Object.keys(productsFromLS);
+    */
+
     let keys = Object.keys(localStorage);
     for(let key of keys) {
         orders.push( JSON.parse(localStorage.getItem(key)) );
