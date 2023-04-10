@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="hw34.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="categories">
+            <h2>Categories</h2>
+            <ul>
+                <li><a href="#" class="category">Category 1</a></li>
+                <li><a href="#" class="category">Category 2</a></li>
+                <li><a href="#" class="category">Category 3</a></li>
+            </ul>
+        </div>
+        <div class="products">
+            <h2>Products</h2>
+            <ul></ul>
+        </div>
+        <div class="product-info">
+            <h2>Product Information</h2>
+            <p id="product-name"></p>
+            
+            <button class="order-btn" id="order-product-button" style="display:none">Order product</button>
+
+            <div id="order-form" style="display:none">
+                <h2>Order registration</h2>
+                <form>
+                    <label>Name:</label>
+                    <input type="text" id="name-input" required><br>
+
+                    <label>City:</label>
+                    <select id="city-select" required>
+                        <option value="">Select city</option>
+                        <option value="Odesa">Odesa</option>
+                        <option value="Reni">Reni</option>
+                        <option value="Izmail">Izmail</option>
+                    </select><br>
+
+                    <label>Post office for sending:</label>
+                    <input type="text" id="post-office-input" required><br>
+
+                    <label>Payment method:</label><br>
+                    <input type="radio" id="postpaid-radio" name="payment" value="postpaid" required>
+                    <label for="postpaid-radio">Postpaid</label><br>
+                    <input type="radio" id="card-radio" name="payment" value="card" required>
+                    <label for="card-radio">Bank card</label><br>
+
+                    <label>Quantity:</label>
+                    <input type="number" id="quantity-input" min="1" required><br>
+
+                    <label>Comment:</label>
+                    <textarea id="comment-input"></textarea><br>
+
+                    <button id="buy-btn" type="submit">Buy product</button>
+                </form>
+            </div>
+
+            <div id="order-confirmation" style="display:none">
+                <h2>Order confirmation</h2>
+                <p id="product-info"></p>
+                <p id="delivery-info"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/homework/hw34final/hw34.js"></script>
+    <script></script>
+</body>
+
+</html>
