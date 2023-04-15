@@ -1,5 +1,6 @@
 const API_ENDPOINT_MAIN = "http://api.openweathermap.org/data/2.5/weather?q=";
 const API_ENDPOINT_END = "&units=metric&APPID=5d066958a60d315387d9492393935c19";
+const API_ICON = "http://openweathermap.org/img/w/"
 
 const form = document.querySelector(".top-banner form");
 
@@ -16,7 +17,7 @@ form.addEventListener("submit", e => {
         .then(response => response.json())
         .then(data => {
             const { main, name, sys, weather, wind } = data;
-            const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${weather[0]["icon"]}.svg`;
+            const icon = `${API_ICON}${weather[0]["icon"]}.png`;
 
             const cityWeather = document.querySelector(".cityWeather");
             cityWeather.classList.add("city");
@@ -34,7 +35,7 @@ form.addEventListener("submit", e => {
                     <figcaption>${weather[0]["description"]}</figcaption>
                 </figure> 
             `;
-            
+          
         })
         .catch(() => {
             msg.textContent = "Please search for a valid city 😩";
