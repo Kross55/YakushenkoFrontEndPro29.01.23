@@ -1,6 +1,5 @@
-const API_ENDPOINT_MAIN = "http://api.openweathermap.org/data/2.5/weather?q=";
-const API_ENDPOINT_END = "&units=metric&APPID=5d066958a60d315387d9492393935c19";
-const API_ICON = "http://openweathermap.org/img/w/"
+const API_ENDPOINT = "http://api.openweathermap.org/data/2.5/weather";
+const API_ICON = "http://openweathermap.org/img/w/";
 
 const form = document.querySelector(".top-banner form");
 
@@ -11,7 +10,32 @@ form.addEventListener("submit", e => {
     let inputVal = input.value;
 
     //ajax here
-    const url = `${API_ENDPOINT_MAIN}${inputVal}${API_ENDPOINT_END}`
+    const params = {
+        q: inputVal,
+        units: "metric",
+        APPID: "5d066958a60d315387d9492393935c19" 
+    };
+      
+    const query = Object
+        .keys(params)
+        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+        .join('&');
+      
+    console.log(query)//q=${inputVal}&units=metric&APPID=5d066958a60d315387d9492393935c19
+    
+    const url = `${API_ENDPOINT}?${query}`
+
+    /* second solution
+    * const params = new URLSearchParams({
+    * q: inputValue,
+    * units: "metric",
+    * APPID: "5d066958a60d315387d9492393935c19"
+    * });
+    * 
+    * console.log(params.toString())//q=${inputVal}&units=metric&APPID=5d066958a60d315387d9492393935c19
+    *
+    * const url = `${API_ENDPOINT}?${params.toString()}`;
+    */
 
     fetch(url)
         .then(response => response.json())
