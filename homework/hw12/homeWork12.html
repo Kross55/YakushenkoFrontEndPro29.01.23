@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+
+    <script>
+        
+        let arrString = prompt('Введіть єлементи массиву через кому', '');
+        let arrLength = prompt('Введіть довжину массиву', '');
+
+        let customArr = arrString.split(',');
+        customArr.length = arrLength;
+
+        let div = document.createElement('div');
+        div.className = 'customArr';
+        div.innerHTML = String(customArr);
+
+        document.body.append(div);
+
+        let sortedArr = customArr.sort( (a, b) => a - b);
+
+        let div1 = document.createElement('div');
+        div1.className = 'sortedArr';
+        div1.innerHTML = String(customArr);
+        document.body.append(div1);
+
+        let changedArr = customArr.splice(2, 3);
+        
+        let div2 = document.createElement('div');
+        div2.className = 'changedArr';
+        div2.innerHTML = String(customArr);
+        document.body.append(div2);
+
+    </script>
+</body>
+</html>
