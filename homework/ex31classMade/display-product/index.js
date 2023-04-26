@@ -23,6 +23,8 @@ fetch("./products.json")
         let selectedCategory = categoriesList[0];
         let selectedProduct = productsByCategory[selectedCategory][0].id;
 
+        const purchaseListBtn = document.querySelector('#myPurchase');
+        const backToPageBtn = document.querySelector('#backToPage')
         const containerCategories = document.querySelector(
             '[data-component="categories"]'
         );
@@ -317,9 +319,10 @@ fetch("./products.json")
                 product.date = new Date();
                 product.quantity = +quantity;
                 product.price *= product.quantity
-                console.log(product);
           
                 localStorage.setItem(`${product['id']}`, JSON.stringify(product));
+
+                console.log(localStorage);
           
                 /*
                 // Get products from LS, maybe saved before
@@ -331,82 +334,95 @@ fetch("./products.json")
                 localStorage.setItem(SOME_STORAGE_KEY, JSON.stringify(productsFromLS));
                 */
             }
-          
-            const purchaseListBtn = document.querySelector('#myPurchase');
-          
-            purchaseListBtn.addEventListener('click', showPurchaseList);
-          
-            function showPurchaseList() {
-                const purchaseList = document.querySelector('.purchaseList');
-                const categoriesProductsContainer = document.querySelector('#categoriesProductsBody');
-                const orderList = document.querySelector('#order-list');
-                const totalPriceDiv = document.querySelector('#totalPrice')
-
-                categoriesProductsContainer.classList.add('hidden');
-                purchaseListBtn.style.display = 'none';
-                purchaseList.style.display = 'block';
-          
-                const orders = [];
-          
-                /*
-                // Get products from LS, maybe saved before
-                const rawFromLS = localStorage.getItem(SOME_STORAGE_KEY);
-                const productsFromLS = rawFromLS == null ? {} : JSON.parse(rawFromLS);
-          
-                const keys = Object.keys(productsFromLS);
-                */
-          
-                let keys = Object.keys(localStorage);
-                for(let key of keys) {
-                    orders.push( JSON.parse(localStorage.getItem(key)) );
-                }
-          
-                console.log(localStorage);
-                console.log(orders);
-            
-                // Clear the current order list
-                orderList.innerHTML = '';
-                totalPriceDiv.innerHTML = '';
-            
-                // Loop through the orders and add them to the order list
-                orders.forEach(order => {
-                    const li = document.createElement('li');
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.textContent = 'X';
-          
-                    li.textContent = `${order.title} - ${order.quantity} item. Price: $ ${order.price} `;
-                    li.append(deleteBtn);
-                    orderList.appendChild(li);
-          
-                    deleteBtn.addEventListener('click', removeProductFromList);
-          
-                    function removeProductFromList() {
-                        localStorage.removeItem(`${order.id}`);
-                        showPurchaseList();
-                    }
-                });
-          
-                const today = new Date();
-                const day = today.getDate();
-                const month = today.getMonth() + 1; 
-                const year = today.getFullYear();
-          
-                const currentDate = `${day}/${month}/${year}`;
-          
-                const totalPrice = orders.reduce( (sum, current) => {
-                    return sum + current.price
-                }, 0)
-          
-                console.log(totalPrice);
-                if(totalPrice === 0) {
-                    totalPriceDiv.innerHTML = '';
-                } else {
-                    totalPriceDiv.innerHTML = `${currentDate} Total $ ${totalPrice}`;
-                }  
-          
-            }
-
-
-  
         }
+
+        purchaseListBtn.addEventListener('click', showPurchaseList);
+        const purchaseList = document.querySelector('.purchaseList');
+          
+        function showPurchaseList() {
+            const orderList = document.querySelector('#order-list');
+            const totalPriceDiv = document.querySelector('#totalPrice');
+      
+            const orders = [];
+      
+            /*
+            // Get products from LS, maybe saved before
+            const rawFromLS = localStorage.getItem(SOME_STORAGE_KEY);
+            const productsFromLS = rawFromLS == null ? {} : JSON.parse(rawFromLS);
+      
+            const keys = Object.keys(productsFromLS);
+            */
+      
+            let keys = Object.keys(localStorage);
+            for(let key of keys) {
+                orders.push( JSON.parse(localStorage.getItem(key)) );
+            }
+        
+            // Clear the current order list
+            orderList.innerHTML = '';
+            totalPriceDiv.innerHTML = '';
+        
+            // Loop through the orders and add them to the order list
+            orders.forEach(order => {
+                const li = document.createElement('li');
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'X';
+      
+                li.textContent = `${order.title} - ${order.quantity} item. Price: $ ${order.price} `;
+                li.append(deleteBtn);
+                orderList.appendChild(li);
+      
+                deleteBtn.addEventListener('click', removeProductFromList);
+      
+                function removeProductFromList() {
+                    localStorage.removeItem(`${order.id}`);
+                    showPurchaseList();
+                }
+            });
+      
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1; 
+            const year = today.getFullYear();
+      
+            const currentDate = `${day}/${month}/${year}`;
+      
+            const totalPrice = orders.reduce( (sum, current) => {
+                return sum + current.price
+            }, 0)
+            
+            console.log(localStorage);
+            console.log(totalPrice);
+
+            if(totalPrice === 0) {
+                totalPriceDiv.innerHTML = '';
+            } else {
+                totalPriceDiv.innerHTML = `${currentDate} Total price: $ ${totalPrice}`;
+            } 
+            
+            containerCategories.style.display = 'none';
+            containerProducts.style.display = 'none';
+            containerDetails.style.display = 'none';
+            containerImages.style.display = 'none';
+            purchaseListBtn.style.display = 'none';
+            purchaseList.style.display = 'block';
+        }
+
+        backToPageBtn.addEventListener('click', showPage);
+
+        function showPage() {
+            containerCategories.style.display = 'flex';
+            containerProducts.style.display = 'flex';
+            containerDetails.style.display = 'flex';
+            containerImages.style.display = 'flex';
+            purchaseListBtn.style.display = 'block';
+            purchaseList.style.display = 'none';
+        }
+
     });
+
+
+
+
+
+    
