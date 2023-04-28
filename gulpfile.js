@@ -15,13 +15,13 @@
 //series запускает функции в нужной нам последовательности
 const { src, dest, watch, parallel, series } = require('gulp')
 
-const scss = require('gulp-sass')(require('sass'))
-const concat = require('gulp-concat')
+const scss         = require('gulp-sass')(require('sass'))
+const concat       = require('gulp-concat')
 const autoprefixer = require('gulp-autoprefixer')
-const imagemin = require('gulp-imagemin')
-const browserSync = require('browser-sync').create()
-const uglify = require('gulp-uglify-es').default
-const del = require('del')
+const imagemin     = require('gulp-imagemin')
+const browserSync  = require('browser-sync').create()
+const uglify       = require('gulp-uglify-es').default
+const del          = require('del')
 
 function cleanDist() {
     return del('dist')
@@ -92,7 +92,7 @@ function build() {
 }
 
 function watching() {
-    //следить за изменениями всех файлов расширения scss и запускать ф-цию styles
+    //следить за изменениями всех файлов расширения scss во всех папках(не зависимо от вложенности) и запускать ф-цию styles
     watch(['app/scss/**/*.scss'], styles)
     //следим за всеми файлами расширения js кроме main.min.js
     watch(['app/js/**/*.js', '!app/js/main.min.js'], scripts)
@@ -107,9 +107,9 @@ exports.browsersync = browsersync
 exports.cleanDist = cleanDist
 exports.images = images
 
-//запускаем сразу все ф-ции одновременно
+//запускаем сразу все ф-ции одновременно командой "gulp"
 exports.default = parallel(styles, scripts, watching, browsersync)
 
-//очищаем dist, сжимаем картинки и добавляем в dist, собираем весь проект в dist заново(обновлёный)//запускается в конце проекта, когда всё всем нравится и готово для продакшена
+//очищаем dist, сжимаем картинки и добавляем в dist, собираем весь проект в dist заново(обновлёный)//запускается в конце проекта, когда всё всем нравится и готово для продакшена командой "gulp build"
 exports.build = series(cleanDist, images, build)
 
