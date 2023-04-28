@@ -113,3 +113,10 @@ exports.default = parallel(styles, scripts, watching, browsersync)
 //очищаем dist, сжимаем картинки и добавляем в dist, собираем весь проект в dist заново(обновлёный)//запускается в конце проекта, когда всё всем нравится и готово для продакшена командой "gulp build"
 exports.build = series(cleanDist, images, build)
 
+
+//для запуска с другого ПК, устанавливаем gulp глобально 
+//npm install -g gulp
+//проверить, должно быть - CurrentUser:RemoteSigned
+//Get-ExecutionPolicy -List
+//если нет, присваиваем командой
+//Set-ExecutionPolicy -Scope Curr
