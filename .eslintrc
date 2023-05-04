@@ -1,12 +1,15 @@
 {
-    "extends": "eslint:recommended",
+    "extends": "airbnb-base",
+    "parser": "@babel/eslint-parser",
     "env": {
       "browser": true,
-      "node": true,
+      "jquery":true,
       "es6": true
     },
     "rules": {
       "no-console": 0,
-      "indent": 2
+      "indent": 2,
+      "semi": ["error", "always"],
+      "quotes": ["error", "single"]
     }
 }

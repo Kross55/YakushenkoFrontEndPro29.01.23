@@ -1,0 +1,3 @@
+.eslintrc.js
+./app/js/main.min.js
+node_modules
